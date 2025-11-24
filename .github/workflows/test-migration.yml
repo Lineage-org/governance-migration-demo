@@ -30,7 +30,7 @@ permissions:
 jobs:
   test-migration:
     name: Test Migration Compatibility
-    uses: NixLine-org/.github/.github/workflows/test-governance-migration.yml@stable
+    uses: Lineage-org/.github/.github/workflows/test-governance-migration.yml@stable
     with:
       governance-repo: ${{ inputs.governance-repo }}
       organization-name: ${{ inputs.organization-name }}

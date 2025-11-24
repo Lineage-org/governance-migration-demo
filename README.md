@@ -1,57 +1,35 @@
 # Governance Migration Demo
 
-This repository demonstrates how to use NixLine's reusable workflows to migrate existing governance repositories to NixLine baseline format.
+This repository demonstrates how to use Lineage's reusable workflows to migrate existing governance repositories to Lineage baseline format.
 
 ## Overview
 
-This demo repository contains example workflows that show how to:
+This demo repository contains example workflows that show how to test migration compatibility and perform actual migration to generate a Lineage baseline with different output modes including artifacts, commits and pull requests.
 
-1. **Test migration compatibility** of any governance repository
-2. **Perform actual migration** to generate a NixLine baseline
-3. **Handle different output modes** (artifacts, commits, pull requests)
-
-**Important**: This repository doesn't contain sample governance files. Instead, the workflows analyze external governance repositories specified by URL.
+This repository doesn't contain sample governance files. Instead, the workflows analyze external governance repositories specified by URL.
 
 ## Workflow Usage
 
-### 1. Test Migration Compatibility
+### Test Migration Compatibility
 
-`.github/workflows/test-migration.yml` - Tests whether a governance repository is ready for migration
+The `.github/workflows/test-migration.yml` workflow tests whether a governance repository is ready for migration. Run the "Test Governance Migration Compatibility" workflow from the Actions tab, provide the governance repository URL, and review analysis results in the workflow logs.
 
-**Usage:**
-1. Go to Actions tab
-2. Run "Test Governance Migration Compatibility" workflow
-3. Provide the governance repository URL
-4. Review analysis results in the workflow logs
+This workflow analyzes repository structure and governance files, detects project languages and ecosystems, validates migration compatibility, and provides recommendations for any issues found.
 
-**What it does:**
-- Analyzes repository structure and governance files
-- Detects project languages and ecosystems
-- Validates migration compatibility
-- Provides recommendations for any issues found
+### Migrate Governance Repository
 
-### 2. Migrate Governance Repository
+The `.github/workflows/migrate-to-lineage.yml` workflow performs actual migration to create Lineage baseline. Run the "Migrate Governance Repository to Lineage" workflow from the Actions tab, provide governance repository URL and organization details, then choose an output mode.
 
-`.github/workflows/migrate-to-nixline.yml` - Performs actual migration to create NixLine baseline
+Output modes:
+- **artifact**: Downloads a ZIP with generated baseline
+- **commit**: Commits baseline directly to this repository
+- **pr**: Creates a pull request with baseline changes
 
-**Usage:**
-1. Go to Actions tab
-2. Run "Migrate Governance Repository to NixLine" workflow
-3. Provide governance repository URL and organization details
-4. Choose output mode:
-   - **artifact**: Downloads ZIP with generated baseline
-   - **commit**: Commits baseline directly to this repository
-   - **pr**: Creates pull request with baseline changes
+The migration generates a complete Lineage baseline with organization-specific configuration, policy packs for all detected governance files, `.lineage.toml` configuration file and migration report with next steps.
 
-**What it generates:**
-- Complete NixLine baseline with organization-specific configuration
-- Policy packs for all detected governance files
-- `.nixline.toml` configuration file
-- Migration report with next steps
+## Testing with Governance Repositories
 
-## Example Governance Repositories
-
-You can test the workflows with any governance repository that contains files like:
+You can test the workflows with any governance repository that contains standard files:
 - LICENSE
 - SECURITY.md
 - CODEOWNERS / .github/CODEOWNERS
@@ -61,14 +39,8 @@ You can test the workflows with any governance repository that contains files li
 
 ## Migration Process
 
-1. **Test First**: Always run the test workflow before migration
-2. **Review Results**: Check compatibility and fix any issues
-3. **Run Migration**: Use the migrate workflow with desired output mode
-4. **Deploy Baseline**: Use generated baseline to create your organization's NixLine baseline repository
+1. Run the test workflow to check compatibility and fix any issues
+2. Run the migrate workflow with your desired output mode
+3. Use the generated baseline to create your organization's Lineage baseline repository
 
-## Next Steps
-
-After successful migration:
-1. Create your organization's baseline repository using the generated files
-2. Customize the baseline for your specific needs
-3. Deploy to consumer repositories using NixLine's consumption patterns
+After successful migration, create your organization's baseline repository using the generated files, customize the baseline for your specific needs and deploy to consumer repositories using Lineage's consumption patterns.

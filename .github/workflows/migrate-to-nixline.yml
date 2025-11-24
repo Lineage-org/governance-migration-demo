@@ -1,4 +1,4 @@
-name: Migrate Governance Repository to NixLine
+name: Migrate Governance Repository to Lineage
 
 on:
   workflow_dispatch:
@@ -39,8 +39,8 @@ permissions:
 
 jobs:
   migrate:
-    name: Migrate Governance to NixLine Baseline
-    uses: NixLine-org/.github/.github/workflows/migrate-governance.yml@stable
+    name: Migrate Governance to Lineage Baseline
+    uses: Lineage-org/.github/.github/workflows/migrate-governance.yml@stable
     with:
       governance-repo: ${{ inputs.governance-repo }}
       organization-name: ${{ inputs.organization-name }}
